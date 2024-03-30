@@ -24,7 +24,7 @@ void loop() {
   float sig_flex_millivolts = (filtered_sig_flex/1023) * 5; // Convert to millivolts
   float sig_flex_volts = sig_flex_millivolts * 1000; // Convert to volts
 
-  float sig_ext_millivolts = (sig_ext/1023) * 5; // Convert to millivolts
+  float sig_ext_millivolts = (filtered_sig_ext/1023) * 5; // Convert to millivolts
   float sig_ext_volts = sig_ext_millivolts * 1000; // // Convert to millivolts
 
   Serial.print(sig_flex_volts);
