@@ -1,0 +1,3 @@
+from plot_biofeedback_graph import plot_biofeedback_graph
+
+plot_biofeedback_graph()
