@@ -8,6 +8,8 @@ import numpy as np
 import pandas as pd
 import random
 import serial
+import mmap
+import struct
 
 class SessionPage(QMainWindow):
     def __init__(self, paint: bool = False):
@@ -120,6 +122,7 @@ class Plotter(PlotWidget):
     def basic_control(self):
         # Function does not need to be implemented, just uses plot_graph or plot_and_paint_graph
         print()
+        read_from_shared_memory()
 
 
     def basic_control_with_last_data(self):
@@ -156,3 +159,13 @@ class Plotter(PlotWidget):
         self.addItem(self.line2)
     
         self.instant_emg.setData([0, self.ue],[0, self.uf]) # Plot the EMG signal point and line to the origin
+
+
+
+def read_from_shared_memory():
+    data = [0, 0, 0, 0, 0, 0]
+    memory_map_name = "SharedMemoryMap"
+    buffer_size = 6 * struct.calcsize('f')  # Tamanho do buffer em bytes para
+    with mmap.mmap(-1, buffer_size, memory_map_name) as mmf:
+            mmf.read(struct.pack('f'), data)
+    print(data)
