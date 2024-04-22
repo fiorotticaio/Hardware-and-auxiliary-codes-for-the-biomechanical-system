@@ -34,7 +34,7 @@ class Plotter(PlotWidget):
     def __init__(self, paint: bool = False):
         super().__init__()
 
-        # self.serial_port = serial.Serial('COM6', baudrate=9600)
+        self.serial_port = serial.Serial('COM9', baudrate=9600)
 
         self.setMouseEnabled(x=False, y=False)
 
@@ -85,13 +85,11 @@ class Plotter(PlotWidget):
 
     
     def plot_graph(self):
-        # data = self.porta_serial.readline().decode('utf-8').strip() # Read data from serial port
+        data = self.serial_port.readline().decode('utf-8').strip(',') # Read data from serial port
+        self.uf, self.ue = map(float, data.split(',')) # Parse and split the data into the individual parameters
 
-        # self.uf = data[0]
-        # self.ue = data[1]
-
-        self.uf = random.random()
-        self.ue = random.random()
+        # self.uf = random.random()
+        # self.ue = random.random()
 
         # Save data to csv
         with open('data.csv', 'a') as f:
@@ -102,13 +100,11 @@ class Plotter(PlotWidget):
 
 
     def plot_and_paint_graph(self):
-        # data = self.porta_serial.readline().decode('utf-8').strip() # Read data from serial port
+        data = self.serial_port.readline().decode('utf-8').strip() # Read data from serial port
+        self.uf, self.ue = map(float, data.split(',')) # Parse and split the data into the individual parameters
 
-        # self.uf = data[0]
-        # self.ue = data[1]
-
-        self.uf = random.random()
-        self.ue = random.random()
+        # self.uf = random.random()
+        # self.ue = random.random()
 
         # Save data to csv
         with open('data.csv', 'a') as f:
@@ -122,7 +118,6 @@ class Plotter(PlotWidget):
     def basic_control(self):
         # Function does not need to be implemented, just uses plot_graph or plot_and_paint_graph
         print()
-        read_from_shared_memory()
 
 
     def basic_control_with_last_data(self):
