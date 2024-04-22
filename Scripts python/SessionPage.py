@@ -8,6 +8,8 @@ import numpy as np
 import pandas as pd
 import random
 import serial
+import mmap
+import struct
 
 class SessionPage(QMainWindow):
     def __init__(self, paint: bool = False):
@@ -32,7 +34,7 @@ class Plotter(PlotWidget):
     def __init__(self, paint: bool = False):
         super().__init__()
 
-        # self.serial_port = serial.Serial('COM6', baudrate=9600)
+        self.serial_port = serial.Serial('COM9', baudrate=9600)
 
         self.setMouseEnabled(x=False, y=False)
 
@@ -83,13 +85,11 @@ class Plotter(PlotWidget):
 
     
     def plot_graph(self):
-        # data = self.porta_serial.readline().decode('utf-8').strip() # Read data from serial port
+        data = self.serial_port.readline().decode('utf-8').strip(',') # Read data from serial port
+        self.uf, self.ue = map(float, data.split(',')) # Parse and split the data into the individual parameters
 
-        # self.uf = data[0]
-        # self.ue = data[1]
-
-        self.uf = random.random()
-        self.ue = random.random()
+        # self.uf = random.random()
+        # self.ue = random.random()
 
         # Save data to csv
         with open('data.csv', 'a') as f:
@@ -100,13 +100,11 @@ class Plotter(PlotWidget):
 
 
     def plot_and_paint_graph(self):
-        # data = self.porta_serial.readline().decode('utf-8').strip() # Read data from serial port
+        data = self.serial_port.readline().decode('utf-8').strip() # Read data from serial port
+        self.uf, self.ue = map(float, data.split(',')) # Parse and split the data into the individual parameters
 
-        # self.uf = data[0]
-        # self.ue = data[1]
-
-        self.uf = random.random()
-        self.ue = random.random()
+        # self.uf = random.random()
+        # self.ue = random.random()
 
         # Save data to csv
         with open('data.csv', 'a') as f:
@@ -156,3 +154,13 @@ class Plotter(PlotWidget):
         self.addItem(self.line2)
     
         self.instant_emg.setData([0, self.ue],[0, self.uf]) # Plot the EMG signal point and line to the origin
+
+
+
+def read_from_shared_memory():
+    data = [0, 0, 0, 0, 0, 0]
+    memory_map_name = "SharedMemoryMap"
+    buffer_size = 6 * struct.calcsize('f')  # Tamanho do buffer em bytes para
+    with mmap.mmap(-1, buffer_size, memory_map_name) as mmf:
+            mmf.read(struct.pack('f'), data)
+    print(data)
