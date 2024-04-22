@@ -6,8 +6,6 @@ if __name__ == "__main__":
     # Create MainWindow Instance with PyQT
     app = QApplication([])
 
-    time.sleep(2)
-
     paint = False; # Variable to control the painting of the graph
     frontend = SessionPage(paint=paint)
 
