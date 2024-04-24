@@ -8,26 +8,29 @@ The lower the alpha value, the smoother the filter response, and the higher the 
 */
 
 /* Low Pass Filter Parameters */
-const float alpha = 0.9; // Smoothing factor (0 < alpha < 1)
+const float alpha = 0.1; // Smoothing factor (0 < alpha < 1)
 float filtered_sig_flex = 0; // Initial filtered flexion value 
 float filtered_sig_ext = 0; // Initial filtered extension value
 
 /* Co-contraction parameters */
-float mf = 11.24;
-float me = 0.41;
-float m0 = 1.36;
-float uf_max = 2500;
-float ue_max = 4700;
-float uf_min = 300;
-float ue_min = 1000;
-float vel_max = 80;
+// float mf = 11.24;
+float mf = 15;
+// float me = 0.41;
+float me = 0.5;
+// float m0 = 1.36;
+float m0 = 1;
+float uf_max = 1000;
+float ue_max = 1000;
+float uf_min = 500;
+float ue_min = 50;
+float vel_max = 100;
 float prev_velocity = 0;
 float curr_velocity = 0;
 float prev_position = 0;
 float curr_position = 0;
 float K_max = 7;
 float K = 0;
-float ENV_Freq = 90;
+float ENV_Freq = 30;
 
 void setup() {
   Serial.begin(9600);
@@ -58,11 +61,11 @@ void loop() {
   else if (curr_velocity < -vel_max) curr_velocity = -vel_max;
 
   K = K_max * sqrt(uf_norm * uf_norm + ue_norm * ue_norm);
-  curr_position = (curr_velocity + prev_velocity) * 0.5f * (1 / ENV_Freq) + prev_position; // Integration
+  curr_position = (curr_velocity + prev_velocity) * 0.5 * (1 / ENV_Freq) + prev_position; // Integration
   
   /* Proportional control */
-  curr_position = uf_norm * 90; 
-  curr_position = (curr_position + prev_position) / 2.0; // Smooth the position
+  // curr_position = uf_norm * 90; 
+  // curr_position = (curr_position + prev_position) / 2.0; // Smooth the position
 
   if      (curr_position > 90.0) curr_position = 90.0;
   else if (curr_position < 0.0)  curr_position = 0;
