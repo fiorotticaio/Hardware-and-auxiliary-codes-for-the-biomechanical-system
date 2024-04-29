@@ -30,7 +30,7 @@ float prev_position = 0;
 float curr_position = 0;
 float K_max = 7;
 float K = 0;
-float ENV_Freq = 30;
+float ENV_Freq = 25;
 
 void setup() {
   Serial.begin(9600);
@@ -84,6 +84,4 @@ void loop() {
 
   prev_position = curr_position;
 	prev_velocity = curr_velocity;
-
-  delay(1);
 }
