@@ -19,10 +19,10 @@ float mf = 15;
 float me = 0.5;
 // float m0 = 1.36;
 float m0 = 1;
-float uf_max = 1000;
-float ue_max = 1000;
-float uf_min = 500;
-float ue_min = 50;
+float uf_max = 4500;
+float ue_max = 3000;
+float uf_min = 300;
+float ue_min = 100;
 float vel_max = 100;
 float prev_velocity = 0;
 float curr_velocity = 0;
@@ -84,4 +84,6 @@ void loop() {
 
   prev_position = curr_position;
 	prev_velocity = curr_velocity;
+
+  delay(1);
 }

@@ -57,9 +57,10 @@ class Plotter(PlotWidget):
         self.max_ch3 = 20
         self.min_ch1 = 2
         self.min_ch3 = 2
-        self.mf = 11.2396
-        self.me = 0.4062
+        self.mf = 15
+        self.me = 0.5
         self.mo = math.tan((math.atan(self.mf)+math.atan(self.me))/2)
+        self.mo = 0.7
 
         # Plotting the lines
         self.flexion_bound = self.plot(pen=mkPen(color='r', width=4))
