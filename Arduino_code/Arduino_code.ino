@@ -8,22 +8,22 @@ The lower the alpha value, the smoother the filter response, and the higher the 
 */
 
 /* Low Pass Filter Parameters */
-const float alpha = 0.1; // Smoothing factor (0 < alpha < 1)
+const float alpha = 0.5; // Smoothing factor (0 < alpha < 1)
 float filtered_sig_flex = 0; // Initial filtered flexion value 
 float filtered_sig_ext = 0; // Initial filtered extension value
 
 /* Co-contraction parameters */
 // float mf = 11.24;
-float mf = 15;
+float mf = 2.981948184762631;
 // float me = 0.41;
-float me = 0.5;
+float me = 0.1832775164485459;
 // float m0 = 1.36;
-float m0 = 1;
-float uf_max = 4500;
-float ue_max = 3000;
-float uf_min = 300;
-float ue_min = 100;
-float vel_max = 100;
+float m0 = 0.8669426255437207;
+float uf_max = 4735.83;
+float ue_max = 2000.35;
+float uf_min = 1830.792;
+float ue_min = 985.28;
+float vel_max = 60;
 float prev_velocity = 0;
 float curr_velocity = 0;
 float prev_position = 0;
@@ -51,6 +51,11 @@ void loop() {
 
   float uf_norm = (sig_flex_volts - uf_min) / (uf_max - uf_min);
 	float ue_norm = (sig_ext_volts - ue_min) / (ue_max - ue_min);
+
+  if (uf_norm <= 0) uf_norm = 0;
+  if (uf_norm >= 1) uf_norm = 1;
+  if (ue_norm <= 0) ue_norm = 0;
+  if (ue_norm >= 1) ue_norm = 1;
 
   float m = uf_norm / ue_norm;
 
