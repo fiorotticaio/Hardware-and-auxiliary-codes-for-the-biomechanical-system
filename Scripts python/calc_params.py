@@ -36,11 +36,16 @@ with open(file_name_flex, 'r') as arquivo_csv:
     csv_reader = csv.reader(arquivo_csv, delimiter=';')
     
     for line in csv_reader:
-        n1, n2 = map(lambda x: float(x.replace(',', '.')), line[0].split(',')) # Convert comma to period
-        # n1, n2 = map(lambda x: float(x.replace(',', '.')), line) # Convert comma to period
-        # n1, n2 = map(float, line)
-        ch1_f.append(n1)
-        ch2_f.append(n2)
+        n1, n2 = line[0].split(',') # Convert comma to period
+        
+        # Filter a posteriori
+        if float(n1) > 4735 or float(n1) < 1830:
+            continue
+        if float(n2) > 2565 or float(n2) < 985:
+            continue
+
+        ch1_f.append(float(n1))
+        ch2_f.append(float(n2))
 
 
 file_name_ext = 'extension.csv'
@@ -49,11 +54,16 @@ with open(file_name_ext, 'r') as arquivo_csv:
     csv_reader = csv.reader(arquivo_csv, delimiter=';')
     
     for line in csv_reader:
-        n1, n2 = map(lambda x: float(x.replace(',', '.')), line[0].split(',')) # Convert comma to period
-        # n1, n2 = map(lambda x: float(x.replace(',', '.')), line) # Convert comma to period
-        # n1, n2 = map(float, line)
-        ch1_e.append(n1)
-        ch2_e.append(n2)
+        n1, n2 = line[0].split(',') # Convert comma to period
+
+        # Filter a posteriori
+        if float(n1) > 4735 or float(n1) < 1830:
+            continue
+        if float(n2) > 2565 or float(n2) < 985:
+            continue
+
+        ch1_e.append(float(n1))
+        ch2_e.append(float(n2))
 
 
 # Reshape data to be a column vector
@@ -111,7 +121,9 @@ y_fit_0 = 0 + m0 * x_fit_0
 uf_max = max_ch1[0]
 ue_max = max_ch2[0]
 uf_min = min_ch1[0]
+uf_min = (uf_max - uf_min) * 0.4
 ue_min = min_ch2[0]
+ue_min = (ue_max - ue_min) * 0.4
 vel_max = 70
 K_max = 7
 
@@ -121,10 +133,10 @@ print(f"{mf},{me},{m0},{uf_max},{ue_max},{uf_min},{ue_min},{vel_max},{K_max}")
 
 # Plot
 plt.figure()
-#plt.plot(ch1_f)
-#plt.plot(ch2_f)
-#plt.plot(ch1_e)
-#plt.plot(ch2_e)
+# plt.plot(ch1_f)
+# plt.plot(ch2_f)
+# plt.plot(ch1_e)
+# plt.plot(ch2_e)
 plt.scatter(x_f, y_f, color='r', edgecolors='k', marker="*", linewidths=0.1)
 plt.scatter(x_e, y_e, color='b', edgecolors='k''', marker="*", linewidths=0.1)
 plt.plot(x_fit_f, y_fit_f, color='red', label='Linear Fit')
