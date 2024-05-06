@@ -2,8 +2,8 @@ import serial
 import csv
 
 # Serial Port Settings
-porta_serial = serial.Serial('COM6', baudrate=9600)
-file_name = 'extension.csv' # extension.csv
+porta_serial = serial.Serial('COM9', baudrate=9600)
+file_name = 'flexion.csv' # flexion.csv or extension.csv
 
 try:
     with open(file_name, 'w', newline='') as arquivo_csv:
