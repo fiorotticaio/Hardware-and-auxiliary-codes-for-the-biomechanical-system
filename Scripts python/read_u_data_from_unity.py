@@ -1,4 +1,4 @@
-import time
+# AUX FILE
 
 file_path = 'C:/Users/Caio/UFES/Engenharia da Computação/7º Período/PIC-II/Virtual-Reality-Controlled-by-Myoelectric-Signals/Data/uData.csv'
 
