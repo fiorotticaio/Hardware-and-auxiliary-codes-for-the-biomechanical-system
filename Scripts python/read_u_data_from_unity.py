@@ -21,8 +21,6 @@ while True:
     if data:
         curr_file_counter = int(data[0])
         if curr_file_counter > prev_file_counter:
-            # print(data[0], data[2], data[4])
+            # print(data[0], data[1], data[2])
             print("Dado recebido do Unity:", data)
             prev_file_counter = curr_file_counter
-
-    # time.sleep(0.1)  # Espera 0.1 segundos antes de tentar abrir o arquivo novamente
