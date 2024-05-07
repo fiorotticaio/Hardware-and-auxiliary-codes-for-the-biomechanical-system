@@ -14,11 +14,11 @@ float filtered_sig_ext = 0; // Initial filtered extension value
 
 /* Co-contraction parameters */
 // float mf = 11.24;
-float mf = 2.981948184762631;
+float mf = 0.8699132312217228;
 // float me = 0.41;
-float me = 0.1832775164485459;
+float me = 0.08687718093583192;
 // float m0 = 1.36;
-float m0 = 0.8669426255437207;
+float m0 = 0.42432722008070595;
 float uf_max = 4735.83;
 float ue_max = 2000.35;
 float uf_min = 1830.792;
