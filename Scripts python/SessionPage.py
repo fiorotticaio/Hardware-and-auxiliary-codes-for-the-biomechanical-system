@@ -33,8 +33,19 @@ class Plotter(PlotWidget):
         
     def __init__(self, paint: bool = False):
         super().__init__()
+                                         
+        self.file_path = 'C:/Users/Caio/UFES/Engenharia da Computação/7º Período/PIC-II/Virtual-Reality-Controlled-by-Myoelectric-Signals/Data/uData.csv'
+        # Open the csv file that contains uf,ue read from unity
+        while True:
+            try:
+                self.file = open(self.file_path, 'r')
+                break
+            except FileNotFoundError:
+                print("File not found. Waiting...")
 
-        self.serial_port = serial.Serial('COM9', baudrate=9600)
+        # Counter to keep track of the current line index in the previously created file
+        self.curr_file_counter = 0
+        self.prev_file_counter = -1
 
         self.setMouseEnabled(x=False, y=False)
 
@@ -57,10 +68,9 @@ class Plotter(PlotWidget):
         self.max_ch3 = 20
         self.min_ch1 = 2
         self.min_ch3 = 2
-        self.mf = 15
-        self.me = 0.5
+        self.mf = 0.8
+        self.me = 0.08
         self.mo = math.tan((math.atan(self.mf)+math.atan(self.me))/2)
-        self.mo = 0.7
 
         # Plotting the lines
         self.flexion_bound = self.plot(pen=mkPen(color='r', width=4))
@@ -84,13 +94,24 @@ class Plotter(PlotWidget):
         self.elapsed_timer = QElapsedTimer()
         self.elapsed_timer.restart()
 
+
+    def read_data_from_unity(self):
+        data = self.file.readline().strip().split(';')
+        if data == ['']:
+            data = None
+        if data:
+            self.curr_file_counter = int(data[0]) # Get the current line index
+            if self.curr_file_counter > self.prev_file_counter:
+                self.prev_file_counter = self.curr_file_counter
+                uf = float(data[1].replace(',', '.'))
+                ue = float(data[2].replace(',', '.'))
+                return uf, ue
+        
+        return 0, 0
+
     
     def plot_graph(self):
-        data = self.serial_port.readline().decode('utf-8').strip(',') # Read data from serial port
-        self.uf, self.ue = map(float, data.split(',')) # Parse and split the data into the individual parameters
-
-        # self.uf = random.random()
-        # self.ue = random.random()
+        self.uf, self.ue = self.read_data_from_unity()
 
         # Save data to csv
         with open('data.csv', 'a') as f:
@@ -101,11 +122,7 @@ class Plotter(PlotWidget):
 
 
     def plot_and_paint_graph(self):
-        data = self.serial_port.readline().decode('utf-8').strip() # Read data from serial port
-        self.uf, self.ue = map(float, data.split(',')) # Parse and split the data into the individual parameters
-
-        # self.uf = random.random()
-        # self.ue = random.random()
+        self.uf, self.ue = self.read_data_from_unity()
 
         # Save data to csv
         with open('data.csv', 'a') as f:
@@ -155,13 +172,3 @@ class Plotter(PlotWidget):
         self.addItem(self.line2)
     
         self.instant_emg.setData([0, self.ue],[0, self.uf]) # Plot the EMG signal point and line to the origin
-
-
-
-def read_from_shared_memory():
-    data = [0, 0, 0, 0, 0, 0]
-    memory_map_name = "SharedMemoryMap"
-    buffer_size = 6 * struct.calcsize('f')  # Tamanho do buffer em bytes para
-    with mmap.mmap(-1, buffer_size, memory_map_name) as mmf:
-            mmf.read(struct.pack('f'), data)
-    print(data)
