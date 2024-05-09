@@ -98,6 +98,7 @@ b_flex, a_flex = get_linear_fit(model_flex)
 # Create a vector to plot the linear fit
 x_fit_f = np.linspace(0, 1, 100).reshape(-1, 1)
 y_fit_f = 0 + a_flex * x_fit_f
+y_fit_f = 0 + [[6.69]] * x_fit_f # Consertando na mão
 
 # Get linear and angular coefficients
 b_ext, a_ext = get_linear_fit(model_ext)
@@ -109,6 +110,7 @@ y_fit_e = 0 + a_ext * x_fit_e
 # Parse numpy array into float number
 mf = a_flex[0]
 mf = mf[0]
+mf = 6.69 # Consertando na mão 
 me = a_ext[0]
 me = me[0]
 
