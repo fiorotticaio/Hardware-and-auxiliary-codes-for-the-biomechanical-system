@@ -34,7 +34,7 @@ class Plotter(PlotWidget):
     def __init__(self, paint: bool = False):
         super().__init__()
                                          
-        self.file_path = 'C:/Users/Caio/UFES/Engenharia da Computação/7º Período/PIC-II/Virtual-Reality-Controlled-by-Myoelectric-Signals/Data/uData.csv'
+        self.file_path = 'C:/Users/Caio/UFES/Engenharia da Computação/7º Período/PIC-II/Virtual-Reality-Controlled-by-Myoelectric-Signals/Data/mainScene/uData.csv'
         # Open the csv file that contains uf,ue read from unity
         while True:
             try:

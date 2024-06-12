@@ -30,6 +30,7 @@ ch2_e = []
 
 
 file_name_flex = 'C:/Users/Caio/UFES/Engenharia da Computação/7º Período/PIC-II/Hardware-and-auxiliary-codes-for-the-biomechanical-system/Scripts python/flexion.csv'
+# file_name_flex = 'C:C:/Users/Caio/UFES/Engenharia da Computação/7º Período/PIC-II/Virtual-Reality-Controlled-by-Myoelectric-Signals/Data/firstStep/flexion.csv'
 
 # Separate data that is separated by a comma
 with open(file_name_flex, 'r') as arquivo_csv:
@@ -49,6 +50,7 @@ with open(file_name_flex, 'r') as arquivo_csv:
 
 
 file_name_ext = 'C:/Users/Caio/UFES/Engenharia da Computação/7º Período/PIC-II/Hardware-and-auxiliary-codes-for-the-biomechanical-system/Scripts python/extension.csv'
+# file_name_ext = 'C:C:/Users/Caio/UFES/Engenharia da Computação/7º Período/PIC-II/Virtual-Reality-Controlled-by-Myoelectric-Signals/Data/firstStep/extension.csv'
 
 with open(file_name_ext, 'r') as arquivo_csv:
     csv_reader = csv.reader(arquivo_csv, delimiter=';')

@@ -4,7 +4,7 @@ import csv
 import numpy as np
 
 def plot_biofeedback_graph():
-    directory_name = f'C:/Users/Caio/UFES/Engenharia da Computação/7º Período/PIC-II/Virtual-Reality-Controlled-by-Myoelectric-Signals/Data' # Absolute path
+    directory_name = f'C:/Users/Caio/UFES/Engenharia da Computação/7º Período/PIC-II/Virtual-Reality-Controlled-by-Myoelectric-Signals/Data/mainScene' # Absolute path
 
     # List all files in the directory_name that begin with 'biofeedback'
     files = [file for file in os.listdir(directory_name) if file.startswith('biofeedback')]
