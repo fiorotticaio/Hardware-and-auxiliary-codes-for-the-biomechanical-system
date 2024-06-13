@@ -30,14 +30,16 @@ ch2_e = []
 
 
 file_name_flex = 'C:/Users/Caio/UFES/Engenharia da Computação/7º Período/PIC-II/Hardware-and-auxiliary-codes-for-the-biomechanical-system/Scripts python/flexion.csv'
-# file_name_flex = 'C:C:/Users/Caio/UFES/Engenharia da Computação/7º Período/PIC-II/Virtual-Reality-Controlled-by-Myoelectric-Signals/Data/firstStep/flexion.csv'
+# file_name_flex = 'C:/Users/Caio/UFES/Engenharia da Computação/7º Período/PIC-II/Virtual-Reality-Controlled-by-Myoelectric-Signals/Data/firstStep/flexion.csv'
 
 # Separate data that is separated by a comma
 with open(file_name_flex, 'r') as arquivo_csv:
     csv_reader = csv.reader(arquivo_csv, delimiter=';')
     
     for line in csv_reader:
-        n1, n2 = line[0].split(',') # Convert comma to period
+        # n1, n2 = map(lambda x: float(x.replace(',', '.')), line) # Convert comma to period
+        n1, n2 = line[0].split(',')
+
         
         # Filter a posteriori
         # if float(n1) > 4735 or float(n1) < 1830:
@@ -50,13 +52,14 @@ with open(file_name_flex, 'r') as arquivo_csv:
 
 
 file_name_ext = 'C:/Users/Caio/UFES/Engenharia da Computação/7º Período/PIC-II/Hardware-and-auxiliary-codes-for-the-biomechanical-system/Scripts python/extension.csv'
-# file_name_ext = 'C:C:/Users/Caio/UFES/Engenharia da Computação/7º Período/PIC-II/Virtual-Reality-Controlled-by-Myoelectric-Signals/Data/firstStep/extension.csv'
+# file_name_ext = 'C:/Users/Caio/UFES/Engenharia da Computação/7º Período/PIC-II/Virtual-Reality-Controlled-by-Myoelectric-Signals/Data/firstStep/extension.csv'
 
 with open(file_name_ext, 'r') as arquivo_csv:
     csv_reader = csv.reader(arquivo_csv, delimiter=';')
     
     for line in csv_reader:
-        n1, n2 = line[0].split(',') # Convert comma to period
+        # n1, n2 = map(lambda x: float(x.replace(',', '.')), line) # Convert comma to period
+        n1, n2 = line[0].split(',')
 
         # Filter a posteriori
         # if float(n1) > 4735 or float(n1) < 1830:
@@ -100,7 +103,7 @@ b_flex, a_flex = get_linear_fit(model_flex)
 # Create a vector to plot the linear fit
 x_fit_f = np.linspace(0, 1, 100).reshape(-1, 1)
 y_fit_f = 0 + a_flex * x_fit_f
-y_fit_f = 0 + [[6.69]] * x_fit_f # Consertando na mão
+# y_fit_f = 0 + [[6.69]] * x_fit_f # Fixing manually
 
 # Get linear and angular coefficients
 b_ext, a_ext = get_linear_fit(model_ext)
@@ -108,11 +111,12 @@ b_ext, a_ext = get_linear_fit(model_ext)
 # Create a vector to plot the linear fit
 x_fit_e = np.linspace(0, 1, 100).reshape(-1, 1)
 y_fit_e = 0 + a_ext * x_fit_e
+# y_fit_e = 0 + [[0.1] * x_fit_e # Fixing manually
 
 # Parse numpy array into float number
 mf = a_flex[0]
 mf = mf[0]
-mf = 6.69 # Consertando na mão 
+# mf = 6.69 # Fixing manually
 me = a_ext[0]
 me = me[0]
 
