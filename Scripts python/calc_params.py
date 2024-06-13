@@ -40,10 +40,10 @@ with open(file_name_flex, 'r') as arquivo_csv:
         n1, n2 = line[0].split(',') # Convert comma to period
         
         # Filter a posteriori
-        if float(n1) > 4735 or float(n1) < 1830:
-            continue
-        if float(n2) > 2565 or float(n2) < 985:
-            continue
+        # if float(n1) > 4735 or float(n1) < 1830:
+        #     continue
+        # if float(n2) > 2565 or float(n2) < 985:
+        #     continue
 
         ch1_f.append(float(n1))
         ch2_f.append(float(n2))
@@ -59,10 +59,10 @@ with open(file_name_ext, 'r') as arquivo_csv:
         n1, n2 = line[0].split(',') # Convert comma to period
 
         # Filter a posteriori
-        if float(n1) > 4735 or float(n1) < 1830:
-            continue
-        if float(n2) > 2565 or float(n2) < 985:
-            continue
+        # if float(n1) > 4735 or float(n1) < 1830:
+        #     continue
+        # if float(n2) > 2565 or float(n2) < 985:
+        #     continue
 
         ch1_e.append(float(n1))
         ch2_e.append(float(n2))
