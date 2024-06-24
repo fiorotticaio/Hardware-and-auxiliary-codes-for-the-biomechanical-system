@@ -10,6 +10,8 @@ from sklearn.linear_model import LinearRegression
 import csv
 import os
 import sys
+import serial
+import time
 
 import pandas as pd;
 
@@ -134,6 +136,11 @@ ue_min = min_ch2[0]
 ue_min = (ue_max - ue_min) * 0.4
 vel_max = 70
 K_max = 7
+
+# Send parameters to Arduino
+ser = serial.Serial('COM19', 9600)
+ser.write(f"{mf},{me},{m0},{uf_max},{ue_max},{uf_min},{ue_min},{vel_max},{K_max}".encode())  # Envia dados para o Arduino
+
 
 # print(f"11.24,0.41,1.36,6.98,8.04,2.23,2.28,80,7") # Test
 print(f"{mf},{me},{m0},{uf_max},{ue_max},{uf_min},{ue_min},{vel_max},{K_max}")
