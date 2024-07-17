@@ -141,7 +141,7 @@ K_max = 7
 
 # Send parameters to Arduino
 ser = serial.Serial('COM6', 9600)
-ser.write(f"{mf},{me},{m0},{uf_max},{ue_max},{uf_min},{ue_min},{vel_max},{K_max}".encode())  # Envia dados para o Arduino
+ser.write(f"{mf},{me},{m0},{uf_max},{ue_max},{uf_min},{ue_min},{vel_max},{K_max}".encode()) # Send data to arduino 
 
 
 # print(f"11.24,0.41,1.36,6.98,8.04,2.23,2.28,80,7") # Test
