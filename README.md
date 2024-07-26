@@ -8,4 +8,4 @@ This repository comprises crucial Arduino and Python code used on the [Biomechan
 
 ## Media
 
-> More details about the project can be found on the [original repository](https://github.com/fiorotticaio/Virtual-Reality-Controlled-by-Myoelectric-Signals) and also on [this here](https://youtu.be/BspcU_wQjvo)
+> More details about the project can be found on the [original repository](https://github.com/fiorotticaio/Virtual-Reality-Controlled-by-Myoelectric-Signals) and also on [this video](https://youtu.be/BspcU_wQjvo)
